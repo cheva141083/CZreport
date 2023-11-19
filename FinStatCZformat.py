@@ -23,6 +23,24 @@ columna_d = sheet['E']
 for cell in columna_d:
     cell.style = currency_style
 
+
+#delete rows 
+
+rows5 = list(sheet.iter_rows())
+
+
+
+for row3 in reversed(rows5):
+    cell_C = row3[2]
+    cell_E = row3[4]
+        # Check if both columns C and E have zero values
+    if cell_C.value ==0 and cell_E.value==0:
+            # Delete the entire row
+        sheet.delete_rows(row3[0].row)
+
+
+
+
 #Aply border style in column B and D
 
 for row2 in sheet.iter_rows():

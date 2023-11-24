@@ -1,61 +1,37 @@
 import pandas as pd
+import os
 from openpyxl import load_workbook
 from openpyxl.styles import NamedStyle, Border, Side
 
-# Cargar el libro de trabajo existente
-workbook = load_workbook('Copypega.xlsx')
-sheet = workbook['Anual']
-
-# Crear un estilo con el formato deseado (dos decimales)
-currency_style = NamedStyle(name='currency',number_format='#,##0.00')
-
-# Obtener el rango de celdas para la columna B
-columna_b = sheet['C']
-
-# Aplicar el estilo a todas las celdas de la columna B
-for cell in columna_b:
-    cell.style = currency_style
-
-# Obtener el rango de celdas para la columna D
-columna_d = sheet['E']
-
-# Aplicar el estilo a todas las celdas de la columna D
-for cell in columna_d:
-    cell.style = currency_style
-
-
-#delete rows 
-
-rows5 = list(sheet.iter_rows())
-
-
-
-for row3 in reversed(rows5):
-    cell_C = row3[2]
-    cell_E = row3[4]
-        # Check if both columns C and E have zero values
-    if cell_C.value ==0 and cell_E.value==0:
-            # Delete the entire row
-        sheet.delete_rows(row3[0].row)
 
 
 
 
-#Aply border style in column B and D
 
-for row2 in sheet.iter_rows():
-    cell_A = row2[0]
-    cell_C = sheet.cell(row=cell_A.row, column=3)
-    cell_E = sheet.cell(row=cell_A.row, column=5)
+def contar_archivos_en_directorio(folder):
+    try:
+        # Lista de elementos en el directorio
+        elementos = os.listdir(folder)
 
-    
-    if cell_A.value is not None:
-        text_total= "Total"
-        text_subtotal="Subtotal"
-        if text_total in cell_A.value or text_subtotal in cell_A.value:
-            totalborder = Side(style='medium', color='000000')
-            cell_C.border = Border(top=totalborder)
-            cell_E.border = Border(top=totalborder)
+        # Contador para archivos
+        contador_archivos = 0
 
-# Guardar el libro de trabajo actualizado
-workbook.save('Copypegaeditedanual.xlsx')
+        # Itera sobre los elementos y cuenta los archivos
+        for elemento in elementos:
+            ruta_completa = os.path.join(folder, elemento)
+            if os.path.isfile(ruta_completa):
+                contador_archivos += 1
+
+        return contador_archivos
+
+    except FileNotFoundError:
+        print(f'El directorio {folder} no existe.')
+    except Exception as e:
+        print(f'Ocurrió un error al contar los archivos: {e}')
+
+# Search a file in a specific directory
+folderUbication ='E:/Resources/NAM US/Python/QA ASF'
+
+# Obtiene y muestra la cantidad de archivos en el directorio
+cantidad_archivos = contar_archivos_en_directorio(folderUbication)
+print(f'La cantidad de archivos en el directorio {folderUbication} es: {cantidad_archivos}')

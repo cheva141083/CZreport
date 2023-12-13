@@ -6,7 +6,7 @@ from openpyxl.styles import NamedStyle, Border, Side
 
 
 # Search a file in a specific directory
-folderUbication ='E:/Resources/NAM US/Python/QA ASF'
+folderUbication ='E:/Resources/NAM US/Python/QA Accrued trade payables'
 
 #Get list of files in the folder
 filesOnFolder = os.listdir(folderUbication)
@@ -26,6 +26,7 @@ if excelFiles:
     worksheet = book['GL']
     print(worksheet.title)
 
+    
     # Cierra el libro después de trabajar con él
     book.close()
 else:

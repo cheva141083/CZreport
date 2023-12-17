@@ -19,12 +19,34 @@ if excelFiles:
     # Get the first file 
     first_file = os.path.join(folderUbication, excelFiles[0])
 
+    #Get the name of first file
+    file_name = os.path.basename(first_file).split('.')[0]
+    print(file_name)
+
+
     # Open the excel file con OpenPyXL
     book = load_workbook(first_file)
 
     # Operations to apply in file
     worksheet = book['GL']
     print(worksheet.title)
+
+    #Add new column 
+    new_column = 'AX'
+
+    #Cell reference
+    cell_new_column = worksheet[new_column + '1' ]
+
+    #Name new column
+    new_column_name = "Aging in days"
+    cell_new_column.value = new_column_name
+
+    #Save file
+   
+    name_specifications = folderUbication + "/" + file_name + " modified" + ".xlsx"
+    book.save(name_specifications)
+
+
 
     
     # Cierra el libro después de trabajar con él

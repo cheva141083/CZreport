@@ -1,8 +1,8 @@
 import pandas as pd
 import os
+from datetime import datetime
 from openpyxl import load_workbook
 from openpyxl.styles import NamedStyle, Border, Side
-
 
 
 # Search a file in a specific directory
@@ -40,6 +40,28 @@ if excelFiles:
     #Name new column
     new_column_name = "Aging in days"
     cell_new_column.value = new_column_name
+
+    max_row = worksheet.max_row
+
+    for row in range(2, max_row + 1):  # Assuming the data starts from the second row
+    # Get the date from column X
+        date_cell = worksheet.cell(row=row, column=24)  # Column X is the 24th column
+        cell_value = date_cell.value
+        if cell_value is not None:
+            date_value = datetime.strptime(cell_value, "%m/%d/%Y")
+            print(f"Type {type(date_value)}")
+            print(date_value)
+
+            if date_value is not None and isinstance(date_value, datetime):
+                # Calculate the number of days between the date and 11/30/2023
+                target_date = datetime(2023, 11, 30)
+                print(target_date)
+                days_difference = (target_date - date_value).days
+                print(days_difference)
+
+                # Update the value in column AX (50th column)
+                worksheet.cell(row=row, column=50, value=days_difference)
+
 
     #Save file
    

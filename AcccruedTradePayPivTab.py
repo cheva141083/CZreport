@@ -33,13 +33,18 @@ if excelFiles:
 
     #Add new column 
     new_column = 'AX'
+    new_column2 = 'AY'
 
     #Cell reference
     cell_new_column = worksheet[new_column + '1' ]
+    cell_new_column2 = worksheet[new_column + '2' ]
 
     #Name new column
     new_column_name = "Aging in days"
     cell_new_column.value = new_column_name
+
+    new_column_name2 = "Over a year"
+    cell_new_column2.value = new_column_name2
 
     max_row = worksheet.max_row
 
@@ -61,6 +66,23 @@ if excelFiles:
 
                 # Update the value in column AX (50th column)
                 worksheet.cell(row=row, column=50, value=days_difference)
+
+            # Iterate through each row and check the value in column AX
+    for row in range(2, max_row + 1):  # Assuming the data starts from the second row
+        # Get the value from column AX
+        ax_value = worksheet.cell(row=row, column=50).value  # Assuming column AX is the 50th column
+        print(ax_value)
+
+    # Check if the value is over 365
+        if ax_value is not None and ax_value > 365:
+            # Update the corresponding cell in column AW (assuming column AY is the 51th column)
+            worksheet.cell(row=row, column=51, value='Yes')    
+        if ax_value is not None and ax_value < 366:
+            # Update the corresponding cell in column AW (assuming column AY is the 51th column)
+            worksheet.cell(row=row, column=51, value='No')   
+        if ax_value is None and ax_value:
+            # Update the corresponding cell in column AW (assuming column AY is the 51th column)
+            worksheet.cell(row=row, column=51, value='')   
 
 
     #Save file

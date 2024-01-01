@@ -3,6 +3,7 @@ import os
 from datetime import datetime
 from openpyxl import load_workbook
 from openpyxl.styles import NamedStyle, Border, Side
+from openpyxl.utils.dataframe import dataframe_to_rows
 
 
 # Search a file in a specific directory
@@ -83,7 +84,27 @@ if excelFiles:
         if ax_value is None and ax_value:
             # Update the corresponding cell in column AW (assuming column AY is the 51th column)
             worksheet.cell(row=row, column=51, value='')   
+    """
+    # Create a new worksheet for the pivot table
+    pivot_sheet = book.create_sheet(title='PivotTable') 
 
+    # Get the data range from the source sheet
+    data_range = worksheet.dimensions
+
+    # Create a DataFrame from the source sheet data
+    data = list(dataframe_to_rows(worksheet, index=False, header=True))
+    df = pd.DataFrame(data[1:], columns=data[0])
+
+    # Create a PivotTable using pandas
+    pivot_table = pd.pivot_table(df, values='A', index='U', columns='AY', aggfunc='count', fill_value=0)
+
+    # Write the pivot table to the Excel workbook
+    for r_idx, row in enumerate(dataframe_to_rows(pivot_table, index=True, header=True), 1):
+        for c_idx, value in enumerate(row, 1):
+            pivot_sheet.cell(row=r_idx, column=c_idx, value=value)
+
+    """
+    
 
     #Save file
    

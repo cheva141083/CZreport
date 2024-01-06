@@ -93,8 +93,22 @@ if excelFiles:
 
 
 
-    
-    # Cierra el libro después de trabajar con él
+# Cierra el libro después de trabajar con él
     book.close()
 else:
     print("There are not excel files in this folder")
+
+
+#reopen the modify workbook 
+print(name_specifications)
+workbookModified = load_workbook(name_specifications)
+workbookModified_name = os.path.basename(name_specifications)
+print(f"the name of the workbook is: {workbookModified_name}")
+
+
+   
+    
+
+
+    
+    

@@ -105,8 +105,15 @@ workbookModified = load_workbook(name_specifications)
 workbookModified_name = os.path.basename(name_specifications)
 print(f"the name of the workbook is: {workbookModified_name}")
 
+#create a dataframe with the 
 
-   
+sheet_name2='GL'
+df = pd.read_excel(name_specifications, sheet_name=sheet_name2)   
+
+#data frame validations
+print(df.head())
+
+
     
 
 

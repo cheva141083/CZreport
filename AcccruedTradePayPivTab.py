@@ -113,6 +113,15 @@ df = pd.read_excel(name_specifications, sheet_name=sheet_name2)
 #data frame validations
 print(df.head())
 
+# Creating a pivot table
+pivot_table = df.pivot_table(values='Company code', index='Document type', columns='Over a year', aggfunc='count', fill_value=0)
+
+# Displaying the pivot table
+print(pivot_table.to_string())
+
+# Define the folder path and save the pivot table to an Excel file using openpyxl
+output_file_path = folderUbication + "/"+file_name+ '_pivot_table.xlsx'
+pivot_table.to_excel(output_file_path, engine='openpyxl', sheet_name='PivotTable')
 
     
 

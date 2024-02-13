@@ -73,7 +73,7 @@ def modified_file_creation(each_file):
     
 
     #Save file
-    folderUbication2 = 'E:/Resources/NAM US/Python/QA Accrued trade payables modified'
+    folderUbication2 = 'E:/Resources/NAM US/Python/Analisis de cuentas/Accrued Trade Payables/Modificados'
     name_specifications = folderUbication2 + "/" + file_name + " modified" + ".xlsx"
     book.save(name_specifications)
 # Cierra el libro después de trabajar con él
@@ -101,14 +101,14 @@ def pivot_table_creation (each_file2):
     print(pivot_table.to_string())
 
     # Define the folder path and save the pivot table to an Excel file using openpyxl
-    folder_path_pivot_table = 'E:/Resources/NAM US/Python/QA Accrued trade payables pivot tables'
+    folder_path_pivot_table = 'E:/Resources/NAM US/Python/Analisis de cuentas/Accrued Trade Payables/Pivot Tables'
     output_file_path = folder_path_pivot_table + "/"+workbookModified_name + '_pivot_table.xlsx'
     pivot_table.to_excel(output_file_path, engine='openpyxl', sheet_name='PivotTable')
     workbookModified.close()
 
 
 # Search a file in a specific directory
-folderUbication ='E:/Resources/NAM US/Python/QA Accrued trade payables'
+folderUbication ='E:/Resources/NAM US/Python/Analisis de cuentas/Accrued Trade Payables/Originales'
 
 #Get list of files in the folder
 filesOnFolder = os.listdir(folderUbication)
@@ -119,7 +119,7 @@ for file_to_work in filesOnFolder:
     modified_file_creation(each_file)
 
 # Search a file in a specific directory
-folderUbication_modified ='E:/Resources/NAM US/Python/QA Accrued trade payables modified'
+folderUbication_modified ='E:/Resources/NAM US/Python/Analisis de cuentas/Accrued Trade Payables/Modificados'
 
 #Get list of files in the folder
 filesOnFolderModified = os.listdir(folderUbication_modified)

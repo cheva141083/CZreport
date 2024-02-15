@@ -95,15 +95,18 @@ def pivot_table_creation (each_file2):
     print(df.head())
 
     # Creating a pivot table
-    pivot_table = df.pivot_table(values='Company code', index='Document type', columns='Over a year', aggfunc='count', fill_value=0)
+    agg_funcs = {'Company code': 'count', 'Amount in Local Currency': 'sum'}
 
+    pivot_table = df.pivot_table(values=['Company code', 'Amount in Local Currency'] , index='Document type', columns='Over a year', aggfunc=agg_funcs, fill_value=0)
+    
     # Displaying the pivot table
     print(pivot_table.to_string())
 
     # Define the folder path and save the pivot table to an Excel file using openpyxl
     folder_path_pivot_table = 'E:/Resources/NAM US/Python/Analisis de cuentas/Accrued Trade Payables/Pivot Tables'
     output_file_path = folder_path_pivot_table + "/"+workbookModified_name + '_pivot_table.xlsx'
-    pivot_table.to_excel(output_file_path, engine='openpyxl', sheet_name='PivotTable')
+    pivot_table.to_excel(output_file_path, engine='openpyxl', sheet_name='Pivot table')
+    
     workbookModified.close()
 
 

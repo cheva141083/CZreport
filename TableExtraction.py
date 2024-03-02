@@ -1,5 +1,6 @@
 import requests
 from bs4 import BeautifulSoup
+import openpyxl
 
 # URL de la página web
 url = 'http://www.mediatraffic.de/tracks.htm'
@@ -21,6 +22,13 @@ width_tabla = '600'
 # Encontrar la tabla por su clase
 tabla = soup.find('table', {'width': width_tabla})
 
+# Crear un nuevo libro de Excel y una hoja de trabajo
+workbook = openpyxl.Workbook()
+sheet = workbook.active
+
+# Añadir encabezados
+sheet.append(["Numero", "Semanas", "Cancion","Movimiento"])
+
 
 # Verificar si se encontró la tabla
 if tabla:
@@ -32,5 +40,13 @@ if tabla:
         # Imprimir el contenido de cada celda
         for celda in celdas:
             print(celda.text.strip())  # Puedes ajustar esto según tus necesidades
+            numero = celdas[0].text.strip()
+            semanas= celdas[1].text.strip()
+            cancion=  celdas[2].text.strip()
+            movimiento = celdas[3].text.strip()
+            sheet.append([numero,semanas,cancion,movimiento])
+
 else:
     print('No se encontró ninguna tabla en la página.')
+
+workbook.save("mediatraffic.xlsx")    

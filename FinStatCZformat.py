@@ -1,3 +1,5 @@
+
+
 import pandas as pd
 from openpyxl import load_workbook
 from openpyxl.styles import NamedStyle, Border, Side
@@ -5,6 +7,7 @@ from openpyxl.styles import NamedStyle, Border, Side
 # Cargar el libro de trabajo existente
 workbook = load_workbook('Copypega.xlsx')
 sheet = workbook['Mensual']
+
 
 # Crear un estilo con el formato deseado (dos decimales)
 currency_style = NamedStyle(name='currency',number_format='#,##0.00')
